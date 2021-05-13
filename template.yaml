@@ -1,0 +1,140 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Oktanks Telehealth Appliction
+Globals:
+  Function:
+    Runtime: nodejs10.x
+    Timeout: 30
+    MemorySize: 128
+    Layers:
+      - !Join
+        - ':'
+        - - arn:aws:lambda
+          - !Ref AWS::Region
+          - !Ref AWS::AccountId
+          - layer
+          - video-telehealth-layer
+          - 1
+    Environment:
+      Variables:
+        MEDICALCARE_TABLE_NAME: !Ref Appointments
+Resources:
+  ChimeMeetingsAccessPolicy:
+    Type: 'AWS::IAM::Policy'
+    Properties:
+      PolicyName: ChimeMeetingsAccess
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - 'chime:GetMeeting'
+              - 'chime:CreateMeeting'
+              - 'chime:DeleteMeeting'
+              - 'chime:CreateAttendee'
+              - 'chime:DeleteAttendee'
+            Resource: '*'
+      Roles:
+        - Ref: WebsiteLambdaRole
+        - Ref: DoctorsLambdaRole
+        - Ref: CreateAppointmentLambdaRole
+        - Ref: GetAppointmentsLambdaRole
+        - Ref: GetAppointmentLambdaRole
+        - Ref: DeleteAppointmentLambdaRole
+  Appointments:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: AppointmentId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: AppointmentId
+          KeyType: HASH
+      TimeToLiveSpecification:
+        AttributeName: TTL
+        Enabled: true
+  WebsiteLambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: handlers.website
+      Runtime: nodejs10.x
+      CodeUri: dist/
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /
+            Method: GET
+  DoctorsLambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: handlers.doctors
+      Runtime: nodejs10.x
+      CodeUri: dist/
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /appointments
+            Method: GET
+  CreateAppointmentLambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: handlers.createAppointment
+      CodeUri: dist/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref Appointments
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /appointments
+            Method: POST
+  GetAppointmentsLambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: handlers.getAppointments
+      CodeUri: dist/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref Appointments
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /appointments
+            Method: GET
+  GetAppointmentLambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: handlers.getAppointment
+      CodeUri: dist/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref Appointments
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /appointment
+            Method: GET
+  DeleteAppointmentLambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: handlers.deleteAppointment
+      CodeUri: dist/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref Appointments
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /appointment
+            Method: DELETE
+Outputs:
+  ApiURL:
+    Description: "API endpoint URL for Prod environment"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"

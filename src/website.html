@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <title>Octank Healthcare</title>
+        <style>
+          body {
+            background-color: #6e6e6e;
+            margin: 0;
+          }
+          .logo-header {
+            width: 125px;
+          }
+          .website-content {
+            font-size: 30px;
+            letter-spacing: 4px;
+            color: #888;
+            text-align: center;
+            width: 100%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background-color: #fff;
+          }
+        </style>
+    </head>
+    <body>
+        <div class="website-content">
+            <img class="logo-header" src="https://wisdom.corp.amazon.com/docstore/PublishingImages/Pages/AWSome-Builder/octank.png"/>
+            Welcome to Octank Healthcare Telemedicine
+        </div>
+
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="card call-card">
+                    <div class="card-header">
+                        Emergency Video Help Desk
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text telehealth-instructions">Our friendly staff are standing by to answer your questions.  Please complete the information below and we will put you into the emergency queue.</p>
+                        <form>
+                            <div class="form-group">
+                                <input class="telehealth-customer-name form-control form-control-lg" type="name" placeholder="Your Name" required/>
+                            </div>
+                            <div class="form-group feelings">
+                                <label for="feeling">On a scale of 1 to 10 I feel:</label>
+                                <div class="d-flex justify-content-center">
+                                    <span class="material-icons md-36"><span class="material-icons">thumb_down</span></span>
+                                        <input type="range" min="1" max="10" value="5" class="slider feeling">
+                                    <span class="material-icons md-36"><span class="material-icons">thumb_up</span></span>
+                                </div>
+                            </div>
+                        </form>
+                        <button class="telehealth-call btn btn-primary btn-block">Call</button>
+                        <div class="row justify-content-md-center">
+                            <audio class="telehealth-audio"></audio>
+                            <video class="telehealth-local-video"></video>
+                            <video class="telehealth-remote-video"></video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="telehealth-widget">
+          <div class="telehealth-banner">Video Help Desk</div>
+          <div class="telehealth-body">
+            <div class="telehealth-instructions">Our friendly staff are standing by to answer your questions.</div>
+            <input class="telehealth-customer-name" type="name" placeholder="Your Name" required>
+            <button class="telehealth-call btn btn-dark">Call</button>
+            <audio class="telehealth-audio"></audio>
+            <video class="telehealth-local-video"></video>
+            <video class="telehealth-remote-video"></video>
+          </div> -->
+          <style type="text/css" scoped>
+            .telehealth-widget {
+              background-color: #b7dcaa;
+              width: 320px;
+              bottom: 0;
+              right: 0;
+              position: absolute;
+              border: 1px solid black;
+            }
+            .telehealth-body {
+              border-top: 1px solid gray;
+              background-color: #deffda;
+              display: none;
+            }
+            .telehealth-banner {
+              text-align: center;
+              font-family: sans-serif;
+              font-size: 20px;
+              padding: 8px;
+            }
+            /* .telehealth-instructions {
+              font-family: sans-serif;
+              font-size: 16px;
+              padding: 8px;
+            } */
+            .telehealth-audio { display: none; }
+            .telehealth-local-video { width: 320px; height: 180px; display: none; }
+            .telehealth-remote-video { width: 320px; height: 180px; display: none; }
+            .div-center {
+                text-align: center;
+            }
+            /* .telehealth-customer-name {
+              font-family: sans-serif;
+              font-size: 20px;
+              width: 200px;
+              margin: 8px;
+              border: 1px solid gray;
+              padding: 4px;
+              outline: 0;
+            } */
+
+            /* .telehealth-call {
+              font-family: sans-serif;
+              font-size: 20px;
+              width: 70px;
+              margin: 8px;
+              padding: 4px;
+              outline: 0;
+            } */
+            .call-card {
+                margin-top: 20px;
+                width: 450px;
+            }
+            .slider {
+                -webkit-appearance: none;  /* Override default CSS styles */
+                appearance: none;
+                width: 100%; /* Full-width */
+                height: 10px; /* Specified height */
+                background: #d3d3d3; /* Grey background */
+                outline: none; /* Remove outline */
+                opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+                -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+                transition: opacity .2s;
+                margin-left: 5px;
+                margin-right: 5px;
+                margin-top: 7px;
+            }
+            .slider:hover {
+                opacity: 1;
+            }
+
+            /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+            .slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 15px;
+                height: 15px;
+                background: #389cf1
+                cursor: pointer;
+            }
+
+            .slider::-moz-range-thumb {
+                width: 15px;
+                height: 15px;
+                background: #389cf1;
+                cursor: pointer;
+            }
+          </style>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>

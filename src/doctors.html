@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Octank Healthcare</title>
+    <style>
+      body {
+        background-color: #6e6e6e;
+        margin: 0;
+      }
+      table, tr, td {
+        margin: 0;
+        padding: 0;
+      }
+      table {
+        width: 100%;
+      }
+      td {
+        width: 50%;
+        vertical-align: top;
+      }
+      h3 {
+        font-size: 20px;
+        margin: 0;
+        padding: 8px;
+      }
+      .logo-header {
+            width: 125px;
+          }
+      .website-content {
+        font-size: 30px;
+        letter-spacing: 4px;
+        color: #888;
+        text-align: center;
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #fff;
+      }
+      .telehealth-banner {
+        font-size: 30px;
+        letter-spacing: 4px;
+        color: #888;
+        text-align: center;
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #bbb;
+      }
+      .telehealth-queue {
+        font-size: 20px;
+        margin: 8px;
+      }
+      .telehealth-speaking-with {
+        font-size: 20px;
+        padding: 8px;
+      }
+      .telehealth-audio { display: none; }
+      .telehealth-local-video { width: 320px; height: 180px; display: none; }
+      .telehealth-remote-video { width: 320px; height: 180px; display: none; }
+      .call-card {
+          margin-top: 20px;
+      }
+      .div-center {
+          text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="website-content">
+        <img class="logo-header" src="https://wisdom.corp.amazon.com/docstore/PublishingImages/Pages/AWSome-Builder/octank.png"/>
+        Welcome to Octank Healthcare Telemedicine
+    </div>
+    <div class="container">
+      <div class="card call-card">
+        <div class="card-header">
+          Emergency Helpdesk
+        </div>
+        <div class="card-body">
+          <button class="telehealth-join-next btn btn-primary btn-block">Join Next</button>
+          <div class="div-center">
+            <div class="telehealth-speaking-with">Not speaking with anyone right now.</div>
+            <audio class="telehealth-audio"></audio>
+            <div class="row justify-content-md-center">
+              <div class="justify-content-md-center">
+                <video class="telehealth-local-video"></video>
+              </div>
+              <div class="justify-content-md-center">
+                <video class="telehealth-remote-video"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card call-card">
+        <div class="card-header">
+          Customer Queue
+        </div>
+        <div class="card-body">
+          <div class="telehealth-queue">No one is waiting right now.</div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
