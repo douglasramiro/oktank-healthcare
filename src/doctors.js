@@ -169,8 +169,6 @@ function updateOutputDevices(){
     }, error => {
       console.log("Error to list output devices", error)
     });
-    
-    
 }
 
 observer = {
@@ -185,6 +183,7 @@ observer = {
         const videoElement = tileState.localTile ? 'telehealth-local-video' : 'telehealth-remote-video';
         session.audioVideo.bindVideoElement(tileState.tileId, domElement(videoElement));
         domShow(videoElement);
+        domShow('telehealth-settings');
     }
 };
 

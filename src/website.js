@@ -13,6 +13,7 @@ window.addEventListener('load', () => {
     domHide('telehealth-customer-name');
     domHide('feelings');
     domHide('telehealth-call');
+    domShow('telehealth-settings');
     domElement('telehealth-instructions').innerHTML = 'Connecting...';
     const fetchResult = await window.fetch(
       encodeURI(`${create_appointments_endpoint}?PatientName=${domElement('telehealth-customer-name').value}&Feeling=${domElement('feeling').value}`),

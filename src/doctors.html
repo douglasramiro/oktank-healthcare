@@ -60,6 +60,7 @@
         padding: 8px;
       }
       .telehealth-audio { display: none; }
+      .telehealth-settings { display: none; }
       .telehealth-local-video { width: 320px; height: 180px; display: none; }
       .telehealth-remote-video { width: 320px; height: 180px; display: none; }
       .call-card {
@@ -72,32 +73,35 @@
   </head>
   <body>
     <div class="website-content">
-        <img class="logo-header" src="https://wisdom.corp.amazon.com/docstore/PublishingImages/Pages/AWSome-Builder/octank.png"/>
+        <img class="logo-header" src="./assets/octank.png"/>
         Welcome to Octank Healthcare Telemedicine
     </div>
     <div class="container">
       <div class="card call-card">
         <div class="card-header">
-          Emergency Helpdesk
+          <div class="col-md offset-md-right">
+            Emergency Helpdesk
+          </div>
         </div>
         <div class="card-body">
-          <select id="videodevice" name="videodevice" className="videodevice" style="display: none">
-          </select>
-          <select id="micdevice" name="micdevice" className="micdevice" style="display: none">
-          </select>
-          <select id="outdevice" name="outdevice" className="outdevice" style="display: none">
-          </select>
-          <button class="telehealth-join-next btn btn-primary btn-block">Join Next</button>
-          <div class="div-center">
-            <div class="telehealth-speaking-with">Not speaking with anyone right now.</div>
-            <audio class="telehealth-audio"></audio>
-            <div class="row justify-content-md-center">
-              <div class="justify-content-md-center">
-                <video class="telehealth-local-video"></video>
-              </div>
-              <div class="justify-content-md-center">
-                <video class="telehealth-remote-video"></video>
-              </div>
+          <div class="row">
+            <button class="telehealth-join-next btn btn-primary btn-block">Join Next</button>
+          </div>
+          <div class="telehealth-speaking-with">Not speaking with anyone right now.</div>
+          <audio class="telehealth-audio"></audio>
+          <div class="row justify-content-md-center telehealth-settings">
+            <div>
+              <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#settingsModal">
+                <span class="material-icons md-18">settings</span>
+              </button>
+            </div>
+          </div>
+          <div class="row justify-content-md-center">
+            <div class="col-lg justify-content-md-center">
+              <video class="telehealth-local-video float-right"></video>
+            </div>
+            <div class="col-lg justify-content-md-center">
+              <video class="telehealth-remote-video"></video>
             </div>
           </div>
         </div>
@@ -113,5 +117,34 @@
       </div>
     </div>
 
+    <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <select class="form-control" id="videodevice" name="videodevice" className="videodevice">
+              </select>
+              <select class="form-control" id="micdevice" name="micdevice" className="micdevice">
+              </select>
+              <select class="form-control" id="outdevice" name="outdevice" className="outdevice">
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>

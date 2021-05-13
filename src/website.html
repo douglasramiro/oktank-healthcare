@@ -26,63 +26,7 @@
             padding-bottom: 10px;
             background-color: #fff;
           }
-        </style>
-    </head>
-    <body>
-        <div class="website-content">
-            <img class="logo-header" src="https://wisdom.corp.amazon.com/docstore/PublishingImages/Pages/AWSome-Builder/octank.png"/>
-            Welcome to Octank Healthcare Telemedicine
-        </div>
-
-        <div class="container">
-            <div class="row justify-content-md-center">
-                <div class="card call-card">
-                    <div class="card-header">
-                        Emergency Video Help Desk
-                    </div>
-                    <div class="card-body">
-                        <select id="videodevice" name="videodevice" className="videodevice" style="display: none">
-                        </select>
-                        <select id="micdevice" name="micdevice" className="micdevice" style="display: none">
-                        </select>
-                        <select id="outdevice" name="outdevice" className="outdevice" style="display: none">
-                        </select>
-                        <p class="card-text telehealth-instructions">Our friendly staff are standing by to answer your questions.  Please complete the information below and we will put you into the emergency queue.</p>
-                        <form>
-                            <div class="form-group">
-                                <input class="telehealth-customer-name form-control form-control-lg" type="name" placeholder="Your Name" required/>
-                            </div>
-                            <div class="form-group feelings">
-                                <label for="feeling">On a scale of 1 to 10 I feel:</label>
-                                <div class="d-flex justify-content-center">
-                                    <span class="material-icons md-36"><span class="material-icons">thumb_down</span></span>
-                                        <input type="range" min="1" max="10" value="5" class="slider feeling">
-                                    <span class="material-icons md-36"><span class="material-icons">thumb_up</span></span>
-                                </div>
-                            </div>
-                        </form>
-                        <button class="telehealth-call btn btn-primary btn-block">Call</button>
-                        <div class="row justify-content-md-center">
-                            <audio class="telehealth-audio"></audio>
-                            <video class="telehealth-local-video"></video>
-                            <video class="telehealth-remote-video"></video>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- <div class="telehealth-widget">
-          <div class="telehealth-banner">Video Help Desk</div>
-          <div class="telehealth-body">
-            <div class="telehealth-instructions">Our friendly staff are standing by to answer your questions.</div>
-            <input class="telehealth-customer-name" type="name" placeholder="Your Name" required>
-            <button class="telehealth-call btn btn-dark">Call</button>
-            <audio class="telehealth-audio"></audio>
-            <video class="telehealth-local-video"></video>
-            <video class="telehealth-remote-video"></video>
-          </div> -->
-          <style type="text/css" scoped>
-            .telehealth-widget {
+          .telehealth-widget {
               background-color: #b7dcaa;
               width: 320px;
               bottom: 0;
@@ -101,35 +45,13 @@
               font-size: 20px;
               padding: 8px;
             }
-            /* .telehealth-instructions {
-              font-family: sans-serif;
-              font-size: 16px;
-              padding: 8px;
-            } */
             .telehealth-audio { display: none; }
+            .telehealth-settings { display: none; }
             .telehealth-local-video { width: 320px; height: 180px; display: none; }
             .telehealth-remote-video { width: 320px; height: 180px; display: none; }
             .div-center {
                 text-align: center;
             }
-            /* .telehealth-customer-name {
-              font-family: sans-serif;
-              font-size: 20px;
-              width: 200px;
-              margin: 8px;
-              border: 1px solid gray;
-              padding: 4px;
-              outline: 0;
-            } */
-
-            /* .telehealth-call {
-              font-family: sans-serif;
-              font-size: 20px;
-              width: 70px;
-              margin: 8px;
-              padding: 4px;
-              outline: 0;
-            } */
             .call-card {
                 margin-top: 20px;
                 width: 450px;
@@ -158,21 +80,91 @@
                 appearance: none;
                 width: 15px;
                 height: 15px;
-                background: #389cf1
+                background: #389cf1;
                 cursor: pointer;
             }
 
-            .slider::-moz-range-thumb {
+            .slider::-moz-range-thumb, .slider::-webkit-range-thumb {
                 width: 15px;
                 height: 15px;
                 background: #389cf1;
                 cursor: pointer;
             }
-          </style>
+        </style>
+    </head>
+    <body>
+        <div class="website-content">
+          <img class="logo-header" src="./assets/octank.png"/>
+          Welcome to Octank Healthcare Telemedicine
+        </div>
+
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="card call-card">
+              <div class="card-header">
+                  Emergency Video Help Desk
+              </div>
+              <div class="card-body">
+                <p class="card-text telehealth-instructions">Our friendly staff are standing by to answer your questions.  Please complete the information below and we will put you into the emergency queue.</p>
+                <form>
+                    <div class="form-group">
+                        <input class="telehealth-customer-name form-control form-control-lg" type="name" placeholder="Your Name" required/>
+                    </div>
+                    <div class="form-group feelings">
+                        <label for="feeling">On a scale of 1 to 10 I feel:</label>
+                        <div class="d-flex justify-content-center">
+                            <span class="material-icons md-36"><span class="material-icons">thumb_down</span></span>
+                                <input type="range" min="1" max="10" value="5" class="slider feeling">
+                            <span class="material-icons md-36"><span class="material-icons">thumb_up</span></span>
+                        </div>
+                    </div>
+                </form>
+                <button class="telehealth-call btn btn-primary btn-block">Call</button>
+                <div class="row justify-content-md-center telehealth-settings">
+                  <div>
+                    <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#settingsModal">
+                      <span class="material-icons md-18">settings</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <audio class="telehealth-audio"></audio>
+                    <video class="telehealth-local-video"></video>
+                    <video class="telehealth-remote-video"></video>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <select class="form-control" id="videodevice" name="videodevice" className="videodevice">
+                  </select>
+                  <select class="form-control" id="micdevice" name="micdevice" className="micdevice">
+                  </select>
+                  <select class="form-control" id="outdevice" name="outdevice" className="outdevice">
+                  </select>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>
