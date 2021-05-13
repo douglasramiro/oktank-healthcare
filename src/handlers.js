@@ -35,11 +35,11 @@ exports.createAppointment = async (event, context, callback) => {
     ExternalUserId: uuidv4(),
   }).promise();
 
-  const appointmentId = uuidv4();
+  const AppointmentId = uuidv4();
 
   await ddb.putItem({
     Item: {
-      'AppointmentId': { S: appointmentId },
+      'AppointmentId': { S: AppointmentId },
       'CreatedOnDate': {S: (new Date()).toISOString() },
       'Meeting': { S: JSON.stringify(meeting) },
       'MeetingId': { S: meetingId },
@@ -53,7 +53,7 @@ exports.createAppointment = async (event, context, callback) => {
   }).promise();
 
   return reply(callback, 201, {
-    appointmentId: appointmentId,
+    AppointmentId: AppointmentId,
     Meeting: meeting,
     PatientAttendee: patientAttendee,
   });
@@ -68,33 +68,33 @@ exports.getAppointments = async (event, context, callback) => {
     return 0;
   }).map(item => {
     return {
-      appointmentId: item.appointmentId.S,
+      AppointmentId: item.AppointmentId.S,
       CreatedOnDate: item.CreatedOnDate.S,
-      CustomerName: item.CustomerName.S,
+      PatientName: item.PatientName.S,
       Feeling: item.Feeling.S
     };
   }));
 };
 
 exports.getAppointment = async (event, context, callback) => {
-  if (!event.queryStringParameters || !event.queryStringParameters.appointmentId) {
-    return reply(callback, 400, {Error: 'Must provide appointmentId query parameter'});
+  if (!event.queryStringParameters || !event.queryStringParameters.AppointmentId) {
+    return reply(callback, 400, {Error: 'Must provide AppointmentId query parameter'});
   }
 
-  const appointmentId = event.queryStringParameters.appointmentId;
+  const AppointmentId = event.queryStringParameters.AppointmentId;
 
   let item;
   try {
     result = await ddb.getItem({
-      Key: { appointmentId: { S: appointmentId, }, },
+      Key: { AppointmentId: { S: AppointmentId, }, },
       TableName: process.env.MEDICALCARE_TABLE_NAME,
     }).promise();
     item = result.Item;
     if (!item) {
-      throw new Error('appointmentId not found');
+      throw new Error('AppointmentId not found');
     }
   } catch (err) {
-    return reply(callback, 404, {Error: `appointmentId does not exist: ${appointmentId}`});
+    return reply(callback, 404, {Error: `AppointmentId does not exist: ${AppointmentId}`});
   }
 
   const meetingId = item.MeetingId.S;
@@ -104,46 +104,46 @@ exports.getAppointment = async (event, context, callback) => {
     }).promise();
   } catch (err) {
     await ddb.deleteItem({
-      Key: { appointmentId: { S: appointmentId, }, },
+      Key: { AppointmentId: { S: AppointmentId, }, },
       TableName: process.env.MEDICALCARE_TABLE_NAME,
     }).promise();
-    return reply(callback, 404, {Error: `Meeting no longer exists for appointmentId: ${appointmentId}`});
+    return reply(callback, 404, {Error: `Meeting no longer exists for AppointmentId: ${AppointmentId}`});
   }
 
   return reply(callback, 200, {
-    appointmentId: item.appointmentId.S,
+    AppointmentId: item.AppointmentId.S,
     CreatedOnDate: item.CreatedOnDate.S,
     Meeting: JSON.parse(item.Meeting.S).Meeting,
-    CustomerName: item.CustomerName.S,
+    PatientName: item.PatientName.S,
     Feeling: item.Feeling.S,
     DoctorAttendee: JSON.parse(item.DoctorAttendee.S).Attendee,
   });
 };
 
 exports.deleteAppointment = async (event, context, callback) => {
-  if (!event.queryStringParameters || !event.queryStringParameters.appointmentId) {
-    return reply(callback, 400, {Error: 'Must provide appointmentId query parameter'});
+  if (!event.queryStringParameters || !event.queryStringParameters.AppointmentId) {
+    return reply(callback, 400, {Error: 'Must provide AppointmentId query parameter'});
   }
 
-  const appointmentId = event.queryStringParameters.appointmentId;
+  const AppointmentId = event.queryStringParameters.AppointmentId;
 
   let item;
   try {
     result = await ddb.getItem({
-      Key: { appointmentId: { S: appointmentId, }, },
+      Key: { AppointmentId: { S: AppointmentId, }, },
       TableName: process.env.MEDICALCARE_TABLE_NAME,
     }).promise();
     item = result.Item;
     if (!item) {
-      throw new Error('appointmentId not found');
+      throw new Error('AppointmentId not found');
     }
   } catch (err) {
-    return reply(callback, 404, {Error: `appointmentId does not exist: ${appointmentId}`});
+    return reply(callback, 404, {Error: `AppointmentId does not exist: ${AppointmentId}`});
   }
 
   const meetingId = item.MeetingId.S;
   await ddb.deleteItem({
-    Key: { appointmentId: { S: appointmentId, }, },
+    Key: { AppointmentId: { S: AppointmentId, }, },
     TableName: process.env.MEDICALCARE_TABLE_NAME,
   }).promise();
 
@@ -152,7 +152,7 @@ exports.deleteAppointment = async (event, context, callback) => {
   }).promise();
 
   return reply(callback, 200, {
-    appointmentId: appointmentId,
+    AppointmentId: AppointmentId,
   });
 };
 

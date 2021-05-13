@@ -19,7 +19,7 @@ window.addEventListener('load', async () => {
             return;
         }
         const fetchResult = await window.fetch(
-            window.encodeURI(`${appointment_endpoint}?appointmentId=${appointments[0].appointmentId}`),
+            window.encodeURI(`${appointment_endpoint}?AppointmentId=${appointments[0].AppointmentId}`),
             {method: 'GET'},
         );
         currentappointment = await fetchResult.json();
@@ -48,6 +48,24 @@ window.addEventListener('load', async () => {
         session.audioVideo.bindAudioElement(domElement('telehealth-audio'));
         session.audioVideo.start();
     });
+    
+    document.getElementById('videodevice').addEventListener('change', async() => {
+    const deviceId = document.getElementById('videodevice').value;
+    console.log("Selecting video ",deviceId);
+    await session.audioVideo.chooseVideoInputDevice(deviceId);
+    })
+  
+     document.getElementById('micdevice').addEventListener('change', async() => {
+        const deviceId = document.getElementById('micdevice').value;
+        console.log("Selecting mic ",deviceId);
+        await session.audioVideo.chooseAudioInputDevice(deviceId)
+      })
+  
+  document.getElementById('outdevice').addEventListener('change', async() => {
+    const deviceId = document.getElementById('outdevice').value;
+    console.log("Selecting out ",deviceId);
+    await session.audioVideo.chooseAudioOutputDevice(deviceId)
+  })
 });
 
 async function stopCurrentCall() {
@@ -56,7 +74,7 @@ async function stopCurrentCall() {
     }
     session.audioVideo.stop();
     await window.fetch(
-        window.encodeURI(`${appointment_endpoint}?appointmentId=${currentappointment.appointmentId}`), {method: 'DELETE'},);
+        window.encodeURI(`${appointment_endpoint}?AppointmentId=${currentappointment.AppointmentId}`), {method: 'DELETE'},);
     currentappointment = null;
     session = null;
     refreshQueue();
@@ -68,11 +86,12 @@ async function refreshQueue() {
         {method: 'GET'},
     );
     const appointmentsResponse = await fetchResult.json();
+    console.log("Appointments: ",appointmentsResponse);
     const queue = domElement('telehealth-queue');
     queue.innerHTML = '';
     const activelyWaitingappointments = []
     for (const appointment of appointmentsResponse) {
-        if (currentappointment && appointment.appointmentId === currentappointment.appointmentId) {
+        if (currentappointment && appointment.AppointmentId === currentappointment.AppointmentId) {
             continue;
         }
         activelyWaitingappointments.push(appointment);
@@ -89,9 +108,77 @@ async function refreshQueue() {
     appointments = activelyWaitingappointments;
 }
 
+function updateVideoDevices(){
+  var select = document.getElementById('videodevice');
+    var length = select.options.length;
+    for (var i = length-1; i >= 0; i--) {
+      select.options[i] = null;
+    }
+    session.audioVideo.listVideoInputDevices().then(devices => {
+      console.log("**************** Devices: "+JSON.stringify(devices));
+      devices.map(d => {
+        console.log("Device: "+JSON.stringify(d))
+        var anOption = document.createElement('option');
+        anOption.value = d.deviceId;
+        anOption.innerHTML = d.label
+        select.appendChild(anOption);
+        select.style = 'display: block'
+      })
+    }, error => {
+      console.log("Error to list video devices", error)
+    });
+}
+
+function updateMicDevices(){
+  var select = document.getElementById('micdevice');
+    var length = select.options.length;
+    for (var i = length-1; i >= 0; i--) {
+      select.options[i] = null;
+    }
+    session.audioVideo.listAudioInputDevices().then(devices => {
+      console.log("**************** Devices: "+JSON.stringify(devices));
+      devices.map(d => {
+        console.log("Device: "+JSON.stringify(d))
+        var anOption = document.createElement('option');
+        anOption.value = d.deviceId;
+        anOption.innerHTML = d.label
+        select.appendChild(anOption);
+        select.style = 'display: block'
+      })
+    }, error => {
+      console.log("Error to list mic devices", error)
+    });
+}
+
+function updateOutputDevices(){
+  var select = document.getElementById('outdevice');
+    var length = select.options.length;
+    for (var i = length-1; i >= 0; i--) {
+      select.options[i] = null;
+    }
+    session.audioVideo.listAudioOutputDevices().then(devices => {
+      console.log("**************** Devices: "+JSON.stringify(devices));
+      devices.map(d => {
+        console.log("Device: "+JSON.stringify(d))
+        var anOption = document.createElement('option');
+        anOption.value = d.deviceId;
+        anOption.innerHTML = d.label
+        select.appendChild(anOption);
+        select.style = 'display: block'
+      })
+    }, error => {
+      console.log("Error to list output devices", error)
+    });
+    
+    
+}
+
 observer = {
     audioVideoDidStart: () => {
         domElement('telehealth-speaking-with').innerText = `Speaking with ${currentappointment.PatientName} right now.  On a scale of 1-10 they current rate a ${currentappointment.Feeling}.`;
+        updateVideoDevices();
+        updateMicDevices();
+        updateOutputDevices();
         session.audioVideo.startLocalVideoTile();
     },
     videoTileDidUpdate: tileState => {

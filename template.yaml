@@ -76,7 +76,7 @@ Resources:
         Api1:
           Type: Api
           Properties:
-            Path: /appointments
+            Path: /doctors
             Method: GET
   CreateAppointmentLambda:
     Type: 'AWS::Serverless::Function'

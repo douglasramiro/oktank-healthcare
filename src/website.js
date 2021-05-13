@@ -42,12 +42,97 @@ window.addEventListener('load', () => {
     session.audioVideo.bindAudioElement(domElement('telehealth-audio'));
 
     session.audioVideo.start();
+    
+    document.getElementById('videodevice').addEventListener('change', async() => {
+    const deviceId = document.getElementById('videodevice').value;
+    console.log("Selecting video ",deviceId);
+    await session.audioVideo.chooseVideoInputDevice(deviceId);
+  })
+  
+  document.getElementById('micdevice').addEventListener('change', async() => {
+    const deviceId = document.getElementById('micdevice').value;
+    console.log("Selecting mic ",deviceId);
+    await session.audioVideo.chooseAudioInputDevice(deviceId)
+  })
+  
+  document.getElementById('outdevice').addEventListener('change', async() => {
+    const deviceId = document.getElementById('outdevice').value;
+    console.log("Selecting out ",deviceId);
+    await session.audioVideo.chooseAudioOutputDevice(deviceId)
+  })
   });
 });
+
+function updateVideoDevices(){
+  var select = document.getElementById('videodevice');
+    var length = select.options.length;
+    for (var i = length-1; i >= 0; i--) {
+      select.options[i] = null;
+    }
+    session.audioVideo.listVideoInputDevices().then(devices => {
+      console.log("**************** Devices: "+JSON.stringify(devices));
+      devices.map(d => {
+        console.log("Device: "+JSON.stringify(d))
+        var anOption = document.createElement('option');
+        anOption.value = d.deviceId;
+        anOption.innerHTML = d.label
+        select.appendChild(anOption);
+        select.style = 'display: block'
+      })
+    }, error => {
+      console.log("Error to list video devices", error)
+    });
+}
+
+function updateMicDevices(){
+  var select = document.getElementById('micdevice');
+    var length = select.options.length;
+    for (var i = length-1; i >= 0; i--) {
+      select.options[i] = null;
+    }
+    session.audioVideo.listAudioInputDevices().then(devices => {
+      console.log("**************** Devices: "+JSON.stringify(devices));
+      devices.map(d => {
+        console.log("Device: "+JSON.stringify(d))
+        var anOption = document.createElement('option');
+        anOption.value = d.deviceId;
+        anOption.innerHTML = d.label
+        select.appendChild(anOption);
+        select.style = 'display: block'
+      })
+    }, error => {
+      console.log("Error to list mic devices", error)
+    });
+}
+
+function updateOutputDevices(){
+  var select = document.getElementById('outdevice');
+    var length = select.options.length;
+    for (var i = length-1; i >= 0; i--) {
+      select.options[i] = null;
+    }
+    session.audioVideo.listAudioOutputDevices().then(devices => {
+      console.log("**************** Devices: "+JSON.stringify(devices));
+      devices.map(d => {
+        console.log("Device: "+JSON.stringify(d))
+        var anOption = document.createElement('option');
+        anOption.value = d.deviceId;
+        anOption.innerHTML = d.label
+        select.appendChild(anOption);
+        select.style = 'display: block'
+      })
+    }, error => {
+      console.log("Error to list output devices", error)
+    });
+}
+
 
 observer = {
   audioVideoDidStart: () => {
     domElement('telehealth-instructions').innerHTML = 'Connected...Please hold for the next staff member.';
+    updateVideoDevices();
+    updateMicDevices();
+    updateOutputDevices();
     session.audioVideo.startLocalVideoTile();
   },
   videoTileDidUpdate: tileState => {

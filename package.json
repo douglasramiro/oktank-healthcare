@@ -1,12 +1,12 @@
 {
-  "name": "video-help-desk",
+  "name": "telehealh-oktank",
   "version": "0.1.0",
-  "description": "Video Help Desk",
+  "description": "Oktank TeleHealth application",
   "scripts": {
     "build-layer": "./create-layer",
     "build-website": "webpack --config ./webpack.config.js --env.app=website",
-    "build-helpdesk": "webpack --config ./webpack.config.js --env.app=helpdesk",
-    "build": "npm install && npm run build-layer && npm run build-website && npm run build-helpdesk && cp src/handlers.js dist && rm dist/main.js"
+    "build-doctors": "webpack --config ./webpack.config.js --env.app=doctors",
+    "build": "npm install && npm run build-layer && npm run build-website && npm run build-doctors && cp src/handlers.js dist && rm dist/main.js"
   },
   "devDependencies": {
     "amazon-chime-sdk-js": "^1.0.0",

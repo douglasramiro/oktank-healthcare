@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-LAYER_NAME=video-help-desk-layer
+LAYER_NAME=video-telehealth-layer
 aws lambda list-layer-versions --layer-name $LAYER_NAME | grep LayerVersionArn && { echo 'Layer already created' ; exit 0; }
 rm -rf /tmp/nodejs
 mkdir -p /tmp/nodejs
