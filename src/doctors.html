@@ -1,150 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Octank Healthcare</title>
-    <style>
-      body {
-        background-color: #6e6e6e;
-        margin: 0;
-      }
-      table, tr, td {
-        margin: 0;
-        padding: 0;
-      }
-      table {
-        width: 100%;
-      }
-      td {
-        width: 50%;
-        vertical-align: top;
-      }
-      h3 {
-        font-size: 20px;
-        margin: 0;
-        padding: 8px;
-      }
-      .logo-header {
-            width: 125px;
-          }
-      .website-content {
-        font-size: 30px;
-        letter-spacing: 4px;
-        color: #888;
-        text-align: center;
-        width: 100%;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        background-color: #fff;
-      }
-      .telehealth-banner {
-        font-size: 30px;
-        letter-spacing: 4px;
-        color: #888;
-        text-align: center;
-        width: 100%;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        background-color: #bbb;
-      }
-      .telehealth-queue {
-        font-size: 20px;
-        margin: 8px;
-      }
-      .telehealth-speaking-with {
-        font-size: 20px;
-        padding: 8px;
-      }
-      .telehealth-audio { display: none; }
-      .telehealth-settings { display: none; }
-      .telehealth-local-video { width: 320px; height: 180px; display: none; }
-      .telehealth-remote-video { width: 320px; height: 180px; display: none; }
-      .call-card {
-          margin-top: 20px;
-      }
-      .div-center {
-          text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="website-content">
-        <img class="logo-header" src="https://ntunney-public.s3.amazonaws.com/assets/octank.png"/>
-        Welcome to Octank Healthcare Telemedicine
-    </div>
-    <div class="container">
-      <div class="card call-card">
-        <div class="card-header">
-          <div class="col-md offset-md-right">
-            Emergency Helpdesk
-          </div>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>Octank Healthcare</title>
+  <style>
+    body {
+      background-color: #6e6e6e;
+      margin: 0;
+    }
+
+    table,
+    tr,
+    td {
+      margin: 0;
+      padding: 0;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    td {
+      width: 50%;
+      vertical-align: top;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin: 0;
+      padding: 8px;
+    }
+
+    .logo-header {
+      width: 125px;
+    }
+
+    .website-content {
+      font-size: 30px;
+      letter-spacing: 4px;
+      color: #888;
+      text-align: center;
+      width: 100%;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-color: #fff;
+    }
+
+    .telehealth-banner {
+      font-size: 30px;
+      letter-spacing: 4px;
+      color: #888;
+      text-align: center;
+      width: 100%;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-color: #bbb;
+    }
+
+    .telehealth-queue {
+      font-size: 20px;
+      margin: 8px;
+    }
+
+    .telehealth-speaking-with {
+      font-size: 20px;
+      padding: 8px;
+    }
+
+    .telehealth-audio {
+      display: none;
+    }
+
+    .telehealth-settings {
+      display: none;
+    }
+
+    .telehealth-local-video {
+      width: 320px;
+      height: 180px;
+      display: none;
+    }
+
+    .telehealth-remote-video {
+      width: 320px;
+      height: 180px;
+      display: none;
+    }
+
+    .call-card {
+      margin-top: 20px;
+    }
+
+    .div-center {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="website-content">
+    <img class="logo-header" src="https://ntunney-public.s3.amazonaws.com/assets/octank.png" /> Welcome to Octank Healthcare Telehealth
+  </div>
+  <div class="container">
+    <div class="card call-card">
+      <div class="card-header">
+        <div class="col-md offset-md-right">
+          Emergency Helpdesk
         </div>
-        <div class="card-body">
-          <div class="row">
-            <button class="telehealth-join-next btn btn-primary btn-block">Join Next</button>
-          </div>
-          <div class="telehealth-speaking-with">Not speaking with anyone right now.</div>
-          <audio class="telehealth-audio"></audio>
-          <div class="row justify-content-md-center telehealth-settings">
-            <div>
-              <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#settingsModal">
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <button class="telehealth-join-next btn btn-primary btn-block">Join Next</button>
+        </div>
+        <div class="telehealth-speaking-with">Not speaking with anyone right now.</div>
+        <audio class="telehealth-audio"></audio>
+        <div class="row justify-content-md-center telehealth-settings">
+          <div>
+            <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#settingsModal">
                 <span class="material-icons md-18">settings</span>
               </button>
-            </div>
-          </div>
-          <div class="row justify-content-md-center">
-            <div class="col-lg justify-content-md-center">
-              <video class="telehealth-local-video float-right"></video>
-            </div>
-            <div class="col-lg justify-content-md-center">
-              <video class="telehealth-remote-video"></video>
-            </div>
           </div>
         </div>
-      </div>
-
-      <div class="card call-card">
-        <div class="card-header">
-          Customer Queue
-        </div>
-        <div class="card-body">
-          <div class="telehealth-queue">No one is waiting right now.</div>
+        <div class="row justify-content-md-center">
+          <div class="col-lg justify-content-md-center">
+            <video class="telehealth-local-video float-right"></video>
+          </div>
+          <div class="col-lg justify-content-md-center">
+            <video class="telehealth-remote-video"></video>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+
+
+    <div class="card call-card">
+      <div class="card-header">
+        Customer Queue
+      </div>
+      <div class="card-body">
+        <div class="telehealth-queue">No one is waiting right now.</div>
+        <div class="card call-card">
+          <div class="card-header">
+            Scan to Join the Queue
+          </div>
+          <div class="card-body">
+            <img src="data:image/png;base64,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"></img>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <select class="form-control" id="videodevice" name="videodevice" className="videodevice">
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <select class="form-control" id="videodevice" name="videodevice" className="videodevice">
               </select>
-              <select class="form-control" id="micdevice" name="micdevice" className="micdevice">
+            <select class="form-control" id="micdevice" name="micdevice" className="micdevice">
               </select>
-              <select class="form-control" id="outdevice" name="outdevice" className="outdevice">
+            <select class="form-control" id="outdevice" name="outdevice" className="outdevice">
               </select>
-            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
 </html>
